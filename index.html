@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zaynab Noor - Premium Stitched Ladies Wear</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4169E1',
+                        navy: '#003366',
+                        warm: '#FAF7F2'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-warm text-gray-800 font-sans min-h-screen flex flex-col justify-between relative">
+
+    <!-- Top Announcement Bar -->
+    <div id="announcement-bar" class="bg-navy text-white text-xs sm:text-sm py-2 px-4 text-center font-medium tracking-wide">
+        ✨ Free Delivery Across Pakistan on Orders Above Rs. 3,000! | WhatsApp: 0330-8929622 ✨
+    </div>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-white shadow-sm border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center cursor-pointer" onclick="switchView('store')">
+                <div>
+                    <h1 id="brand-title" class="text-base sm:text-2xl font-serif font-bold text-navy tracking-wide whitespace-nowrap">ZAYNAB NOOR</h1>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-3">
+                <button onclick="openCartDrawer()" class="relative bg-navy text-white px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium hover:bg-navy/90 transition flex items-center space-x-2">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="hidden sm:inline">Cart</span>
+                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-primary text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold hidden">0</span>
+                </button>
+                <button onclick="openAdminLogin()" class="border border-navy/30 text-navy px-3 py-2 rounded-full text-xs sm:text-sm font-medium hover:bg-navy hover:text-white transition flex items-center space-x-1">
+                    <i class="fa-solid fa-lock text-xs"></i>
+                    <span>Admin</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow">
+        <!-- STOREFRONT VIEW -->
+        <div id="view-store" class="space-y-8 pb-16">
+            <section class="relative bg-gray-900 text-white overflow-hidden shadow-md">
+                <div id="hero-slider" class="relative h-[320px] sm:h-[450px] w-full flex transition-transform duration-700 ease-in-out">
+                </div>
+                <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/70 text-white w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-sm transition">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/70 text-white w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-sm transition">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+                <div id="slider-dots" class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
+                </div>
+            </section>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+                <div class="flex items-center justify-between border-b border-gray-200 pb-3">
+                    <h2 class="text-xl sm:text-2xl font-serif font-bold text-navy">Our Collections</h2>
+                    <button onclick="openSizeChartModal()" class="text-xs sm:text-sm text-primary font-semibold hover:underline flex items-center space-x-1">
+                        <i class="fa-solid fa-ruler-combined"></i>
+                        <span>View Size Chart</span>
+                    </button>
+                </div>
+
+                <div id="category-tabs" class="flex overflow-x-auto space-x-3 pb-2 scrollbar-none">
+                </div>
+
+                <div id="subcategory-pills" class="flex overflow-x-auto space-x-2 pb-2 text-xs">
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div id="products-grid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+                </div>
+            </div>
+        </div>
+
+        <!-- ADMIN DASHBOARD VIEW -->
+        <div id="view-admin" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-6 rounded-2xl shadow-sm border border-gray-100 gap-4">
+                <div>
+                    <h2 class="text-2xl font-serif font-bold text-navy">Admin Control Center</h2>
+                    <p class="text-sm text-gray-500">Manage products, custom size chart builder, social links & security.</p>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <button onclick="switchView('store')" class="bg-gray-100 text-gray-700 px-4 py-2 rounded-xl text-sm font-medium hover:bg-gray-200 transition">
+                        <i class="fa-solid fa-store mr-1"></i> View Storefront
+                    </button>
+                    <button onclick="logoutAdmin()" class="bg-red-50 text-red-600 px-4 py-2 rounded-xl text-sm font-medium hover:bg-red-100 transition">
+                        <i class="fa-solid fa-right-from-bracket mr-1"></i> Logout
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex overflow-x-auto space-x-2 border-b border-gray-200 pb-2">
+                <button onclick="switchAdminTab('products')" id="tab-btn-products" class="admin-tab-btn px-5 py-2.5 rounded-xl font-medium text-sm bg-navy text-white transition">Products</button>
+                <button onclick="switchAdminTab('categories')" id="tab-btn-categories" class="admin-tab-btn px-5 py-2.5 rounded-xl font-medium text-sm bg-gray-100 text-gray-600 hover:bg-gray-200 transition">Categories</button>
+                <button onclick="switchAdminTab('banners')" id="tab-btn-banners" class="admin-tab-btn px-5 py-2.5 rounded-xl font-medium text-sm bg-gray-100 text-gray-600 hover:bg-gray-200 transition">Banners</button>
+                <button onclick="switchAdminTab('sizechart')" id="tab-btn-sizechart" class="admin-tab-btn px-5 py-2.5 rounded-xl font-medium text-sm bg-gray-100 text-gray-600 hover:bg-gray-200 transition">Size Chart Builder</button>
+                <button onclick="switchAdminTab('settings')" id="tab-btn-settings" class="admin-tab-btn px-5 py-2.5 rounded-xl font-medium text-sm bg-gray-100 text-gray-600 hover:bg-gray-200 transition">Settings & Social</button>
+            </div>
+
+            <!-- TAB 1: PRODUCTS -->
+            <div id="admin-tab-products" class="admin-tab-content space-y-6">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 space-y-4">
+                    <h3 id="product-form-title" class="text-lg font-bold text-navy">Add New Product</h3>
+                    <form id="product-form" onsubmit="handleProductSubmit(event)" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <input type="hidden" id="edit-product-id">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Product Title *</label>
+                            <input type="text" id="p-title" required class="w-full px-3 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-navy focus:outline-none" placeholder="e.g. Royal Embroidered Lawn Suit">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Category *</label>
+                            <select id="p-category" required onchange="updateSubCategoryDropdown()" class="w-full px-3 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-navy focus:outline-none">
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Sub-Category / Style Filter</label>
+                            <select id="p-subcategory" class="w-full px-3 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-navy focus:outline-none">
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Regular Price (Rs.) *</label>
+                            <input type="number" id="p-price" required class="w-full px-3 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-navy focus:outline-none" placeholder="4500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Sale Price (Rs. Optional)</label>
+                            <input type="number" id="p-saleprice" class="w-full px-3 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-navy focus:outline-none" placeholder="3500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Product Image (URL or Upload) *</label>
+                            <div class="flex space-x-2">
+                                <input type="text" id="p-image" required class="w-full px-3 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-navy focus:outline-none" placeholder="https://image-url.com">
+                                <label class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-xl text-xs font-medium cursor-pointer flex items-center">
+                                    <i class="fa-solid fa-upload"></i>
+                                    <input type="file" accept="image/*" onchange="handleImageUpload(event, 'p-image')" class="hidden">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="sm:col-span-2 lg:col-span-3">
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Product Description</label>
+                            <textarea id="p-desc" rows="3" class="w-full px-3 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-navy focus:outline-none" placeholder="Fabric details, embroidery work, shirt & dupatta info..."></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-2">Available Bottom Styles</label>
+                            <div class="flex flex-wrap gap-3">
+                                <label class="flex items-center space-x-2 text-sm"><input type="checkbox" name="p-bottoms" value="Shalwar" class="rounded text-navy"> <span>Shalwar</span></label>
+                                <label class="flex items-center space-x-2 text-sm"><input type="checkbox" name="p-bottoms" value="Trouser" class="rounded text-navy"> <span>Trouser</span></label>
+                                <label class="flex items-center space-x-2 text-sm"><input type="checkbox" name="p-bottoms" value="Flapper" class="rounded text-navy"> <span>Flapper</span></label>
+                                <label class="flex items-center space-x-2 text-sm"><input type="checkbox" name="p-bottoms" value="Plazo" class="rounded text-navy"> <span>Plazo</span></label>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3 pt-6">
+                            <label class="flex items-center space-x-2 text-sm font-medium">
+                                <input type="checkbox" id="p-soldout" class="rounded text-navy w-4 h-4">
+                                <span class="text-red-600 font-semibold">Mark as Sold Out</span>
+                            </label>
+                        </div>
+                        <div class="sm:col-span-2 lg:col-span-3 flex justify-end space-x-3 pt-4 border-t">
+                            <button type="button" onclick="resetProductForm()" class="bg-gray-100 text-gray-600 px-5 py-2 rounded-xl text-sm font-medium hover:bg-gray-200">Cancel</button>
+                            <button type="submit" class="bg-navy text-white px-6 py-2 rounded-xl text-sm font-medium hover:bg-navy/90">Save Product</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="p-4 border-b bg-gray-50 flex justify-between items-center">
+                        <h3 class="font-bold text-navy">All Products Inventory</h3>
+                        <span id="product-count-badge" class="bg-navy/10 text-navy text-xs font-bold px-2.5 py-1 rounded-full">0 Items</span>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="border-b bg-gray-50/50 text-xs uppercase text-gray-500 font-semibold">
+                                    <th class="p-4">Image</th>
+                                    <th class="p-4">Title & Category</th>
+                                    <th class="p-4">Price</th>
+                                    <th class="p-4">Bottoms</th>
+                                    <th class="p-4">Status</th>
+                                    <th class="p-4 text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-products-tbody" class="divide-y divide-gray-100 text-sm">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: CATEGORIES -->
+            <div id="admin-tab-categories" class="admin-tab-content hidden space-y-6">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 space-y-6">
+                    <h3 class="text-lg font-bold text-navy">Manage Categories & Sub-Categories</h3>
+                    <form onsubmit="handleCategoryAdd(event)" class="flex gap-3">
+                        <input type="text" id="new-cat-name" required placeholder="New Category (e.g. Lawn, Khaddar)" class="flex-1 px-4 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-navy focus:outline-none">
+                        <button type="submit" class="bg-navy text-white px-6 py-2 rounded-xl text-sm font-medium hover:bg-navy/90">Add Category</button>
+                    </form>
+                    <div id="admin-categories-list" class="space-y-4">
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: BANNERS -->
+            <div id="admin-tab-banners" class="admin-tab-content hidden space-y-6">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 space-y-6">
+                    <h3 class="text-lg font-bold text-navy">Hero Banners / Slider Management</h3>
+                    <form onsubmit="handleBannerAdd(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Banner Image URL *</label>
+                            <input type="text" id="b-image" required placeholder="https://..." class="w-full px-3 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-navy focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Heading Title</label>
+                            <input type="text" id="b-title" placeholder="Summer Luxury Lawn 2026" class="w-full px-3 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-navy focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Subtitle / Tagline</label>
+                            <input type="text" id="b-subtitle" placeholder="Starting from Rs. 2,999 only" class="w-full px-3 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-navy focus:outline-none">
+                        </div>
+                        <div class="flex items-end">
+                            <button type="submit" class="w-full bg-navy text-white py-2 rounded-xl text-sm font-medium hover:bg-navy/90">Add Slide</button>
+                        </div>
+                    </form>
+                    <div id="admin-banners-list" class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4: CUSTOM SIZE CHART BUILDER -->
+            <div id="admin-tab-sizechart" class="admin-tab-content hidden space-y-6">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 space-y-6">
+                    <div class="flex justify-between items-center border-b pb-4">
+                        <div>
+                            <h3 class="text-lg font-bold text-navy">Custom Size Chart Table Builder</h3>
+                            <p class="text-xs text-gray-500">Design your custom measurements table row by row and column by column.</p>
+                        </div>
+                        <div class="space-x-2">
+                            <button onclick="addSizeChartRow()" class="bg-emerald-600 text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-emerald-700"><i class="fa-solid fa-plus mr-1"></i> Add Row</button>
+                            <button onclick="addSizeChartCol()" class="bg-primary text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-primary/90"><i class="fa-solid fa-plus mr-1"></i> Add Column</button>
+                        </div>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full border-collapse border border-gray-200 text-sm" id="admin-sizechart-table">
+                        </table>
+                    </div>
+
+                    <div class="flex justify-end pt-4">
+                        <button onclick="saveSizeChartTable()" class="bg-navy text-white px-6 py-2.5 rounded-xl text-sm font-medium hover:bg-navy/90">Save Size Chart Table</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 5: SETTINGS & SOCIAL -->
+            <div id="admin-tab-settings" class="admin-tab-content hidden space-y-6">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 space-y-6">
+                    <h3 class="text-lg font-bold text-navy">Store Settings, Logo & Social Media Links</h3>
+                    <form onsubmit="handleSettingsSave(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Store Brand Name</label>
+                            <input type="text" id="set-brand-name" required class="w-full px-3 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-navy focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Brand Logo Image (Upload File)</label>
+                            <div class="flex space-x-2">
+                                <input type="text" id="set-logo-url" class="w-full px-3 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-navy focus:outline-none" placeholder="Logo image base64 or URL">
+                                <label class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-xl text-xs font-medium cursor-pointer flex items-center">
+                                    <i class="fa-solid fa-upload"></i>
+                                    <input type="file" accept="image/*" onchange="handleImageUpload(event, 'set-logo-url')" class="hidden">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Announcement Top Bar Text</label>
+                            <input type="text" id="set-announcement" class="w-full px-3 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-navy focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">WhatsApp Order Number</label>
+                            <input type="text" id="set-whatsapp" required class="w-full px-3 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-navy focus:outline-none" placeholder="923308929622">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">New Admin PIN / Password</label>
+                            <input type="password" id="set-new-pin" placeholder="Leave blank to keep current PIN" class="w-full px-3 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-navy focus:outline-none">
+                        </div>
+
+                        <div class="sm:col-span-2 border-t pt-4">
+                            <h4 class="font-bold text-navy mb-3">Social Media Links (Displayed in Footer)</h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1"><i class="fa-brands fa-facebook text-blue-600 mr-1"></i> Facebook URL</label>
+                                    <input type="text" id="set-social-fb" placeholder="https://facebook.com/..." class="w-full px-3 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-navy focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1"><i class="fa-brands fa-instagram text-pink-600 mr-1"></i> Instagram URL</label>
+                                    <input type="text" id="set-social-ig" placeholder="https://instagram.com/..." class="w-full px-3 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-navy focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1"><i class="fa-brands fa-tiktok mr-1"></i> TikTok URL</label>
+                                    <input type="text" id="set-social-tk" placeholder="https://tiktok.com/..." class="w-full px-3 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-navy focus:outline-none">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sm:col-span-2 flex justify-end">
+                            <button type="submit" class="bg-navy text-white px-6 py-2.5 rounded-xl text-sm font-medium hover:bg-navy/90">Save Settings & Social Links</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-navy text-white py-10 mt-12 border-t border-navy/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+            <h3 id="footer-brand" class="text-xl font-serif font-bold tracking-wider">ZAYNAB NOOR</h3>
+            <p class="text-xs text-gray-300">Premium Stitched Ladies Shalwar Kameez & Designer Suits.</p>
+            <div id="footer-social-icons" class="flex justify-center space-x-4 pt-2">
+            </div>
+            <p class="text-xs text-gray-400 pt-2">&copy; 2026 Zaynab Noor. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <a id="floating-whatsapp" href="#" target="_blank" class="fixed bottom-6 right-6 z-40 bg-emerald-600 hover:bg-emerald-700 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition transform hover:scale-110">
+        <i class="fa-brands fa-whatsapp text-3xl"></i>
+    </a>
+
+    <!-- PRODUCT DETAIL MODAL -->
+    <div id="product-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl relative animate-in fade-in zoom-in duration-200">
+            <button onclick="closeProductModal()" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/80 hover:bg-white text-gray-700 flex items-center justify-center shadow-md transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div id="modal-content" class="grid grid-cols-1 sm:grid-cols-2 max-h-[85vh] overflow-y-auto">
+            </div>
+        </div>
+    </div>
+
+    <!-- SIZE CHART MODAL -->
+    <div id="sizechart-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-xl w-full p-6 space-y-4 relative shadow-2xl">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="text-lg font-bold text-navy font-serif">Custom Size Chart</h3>
+                <button onclick="closeSizeChartModal()" class="text-gray-400 hover:text-gray-700"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <div id="sizechart-container" class="overflow-x-auto text-center">
+            </div>
+        </div>
+    </div>
+
+    <!-- CART SLIDING DRAWER -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden justify-end">
+        <div class="bg-white w-full max-w-md h-full shadow-2xl flex flex-col justify-between p-6 overflow-y-auto transform transition-transform duration-300">
+            <div>
+                <div class="flex justify-between items-center border-b pb-4">
+                    <h3 class="text-lg font-bold text-navy flex items-center space-x-2">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        <span>Your Shopping Cart</span>
+                    </h3>
+                    <button onclick="closeCartDrawer()" class="text-gray-400 hover:text-gray-700"><i class="fa-solid fa-xmark text-xl"></i></button>
+                </div>
+                <div id="cart-items-list" class="divide-y divide-gray-100 py-4 space-y-4 max-h-[50vh] overflow-y-auto">
+                </div>
+            </div>
+            <div class="border-t pt-4 space-y-4">
+                <div class="flex justify-between items-center text-lg font-bold text-navy">
+                    <span>Total Amount:</span>
+                    <span id="cart-total-price">Rs. 0</span>
+                </div>
+                <button onclick="checkoutCartWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-2xl font-bold flex items-center justify-center space-x-2 shadow-lg shadow-emerald-600/25 transition">
+                    <i class="fa-brands fa-whatsapp text-xl"></i>
+                    <span>Checkout All via WhatsApp</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADMIN LOGIN MODAL -->
+    <div id="admin-login-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-sm w-full p-6 space-y-6 relative shadow-2xl">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="text-lg font-bold text-navy">Admin Authentication</h3>
+                <button onclick="closeAdminLogin()" class="text-gray-400 hover:text-gray-700"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 mb-1">Enter Admin PIN / Password</label>
+                    <input type="password" id="admin-pin-input" required class="w-full px-4 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-navy focus:outline-none" placeholder="PIN code">
+                </div>
+                <button type="submit" class="w-full bg-navy text-white py-2.5 rounded-xl text-sm font-medium hover:bg-navy/90">Login to Dashboard</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        const DEFAULT_SETTINGS = {
+            brandName: "ZAYNAB NOOR",
+            logoUrl: "",
+            announcement: "✨ Free Delivery Across Pakistan on Orders Above Rs. 3,000! | WhatsApp: 0330-8929622 ✨",
+            whatsapp: "923308929622",
+            adminPin: "1234",
+            socialFb: "",
+            socialIg: "",
+            socialTk: ""
+        };
+
+        const DEFAULT_SIZE_CHART = [
+            ['Size', 'Chest', 'Length', 'Waist'],
+            ['Small', '19\"', '40\"', '18\"'],
+            ['Medium', '20\"', '41\"', '19\"'],
+            ['Large', '22\"', '42\"', '21\"'],
+            ['XL', '24\"', '43\"', '23\"'],
+            ['XXL', '25\"', '44\"', '24\"'],
+            ['3XL', '26\"', '45\"', '25\"'],
+            ['4XL', '28\"', '46\"', '27\"']
+        ];
+
+        const DEFAULT_CATEGORIES = [
+            { name: "Lawn", subs: ["2PC", "3PC", "Frock", "Kurti"] },
+            { name: "Khaddar", subs: ["2PC", "3PC", "Shawl Suit"] },
+            { name: "Cotton", subs: ["Casual", "Formal"] },
+            { name: "Linen", subs: ["Winter 2PC", "Winter 3PC"] }
+        ];
+
+        const DEFAULT_BANNERS = [
+            { image: "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=1200&auto=format&fit=crop", title: "Summer Luxury Lawn 2026", subtitle: "Stitched Elegance & Premium Fabrics" },
+            { image: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?q=80&w=1200&auto=format&fit=crop", title: "Exclusive Festive Collections", subtitle: "Sizes from Small to 4XL Available" }
+        ];
+
+        const DEFAULT_PRODUCTS = [
+            {
+                id: "p1",
+                title: "Royal Embroidered Lawn 3PC",
+                category: "Lawn",
+                subcategory: "3PC",
+                price: 4800,
+                saleprice: 3800,
+                image: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?q=80&w=600&auto=format&fit=crop",
+                desc: "Premium quality stitched lawn shirt paired with embroidered chiffon dupatta and dyed cambric trouser.",
+                bottoms: ["Trouser", "Shalwar"],
+                soldout: false
+            },
+            {
+                id: "p2",
+                title: "Classic Printed Khaddar 2PC",
+                category: "Khaddar",
+                subcategory: "2PC",
+                price: 3500,
+                saleprice: 2900,
+                image: "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=600&auto=format&fit=crop",
+                desc: "Winter warm khaddar shirt and trouser with elegant digital print.",
+                bottoms: ["Trouser"],
+                soldout: false
+            }
+        ];
+
+        let settings = JSON.parse(localStorage.getItem('zn_settings')) || DEFAULT_SETTINGS;
+        let sizeChartTable = JSON.parse(localStorage.getItem('zn_sizechart')) || DEFAULT_SIZE_CHART;
+        let categories = JSON.parse(localStorage.getItem('zn_categories')) || DEFAULT_CATEGORIES;
+        let banners = JSON.parse(localStorage.getItem('zn_banners')) || DEFAULT_BANNERS;
+        let products = JSON.parse(localStorage.getItem('zn_products')) || DEFAULT_PRODUCTS;
+        let cart = JSON.parse(localStorage.getItem('zn_cart')) || [];
+
+        let currentCategoryFilter = "All";
+        let currentSubCategoryFilter = "All";
+        let currentSlide = 0;
+        let slideInterval;
+
+        window.onload = function() {
+            applySettings();
+            renderHeroSlider();
+            renderCategoryTabs();
+            renderProductsGrid();
+            updateCartBadge();
+            startSliderTimer();
+            renderFooterSocials();
+            const waBtn = document.getElementById('floating-whatsapp');
+            if(waBtn) waBtn.href = 'https://wa.me/' + settings.whatsapp;
+        };
+
+        function saveAllData() {
+            localStorage.setItem('zn_settings', JSON.stringify(settings));
+            localStorage.setItem('zn_sizechart', JSON.stringify(sizeChartTable));
+            localStorage.setItem('zn_categories', JSON.stringify(categories));
+            localStorage.setItem('zn_banners', JSON.stringify(banners));
+            localStorage.setItem('zn_products', JSON.stringify(products));
+            localStorage.setItem('zn_cart', JSON.stringify(cart));
+        }
+
+        function applySettings() {
+            const annBar = document.getElementById('announcement-bar');
+            if(annBar) annBar.innerText = settings.announcement;
+            const bTitle = document.getElementById('brand-title');
+            if(bTitle) bTitle.innerText = settings.brandName;
+            const fBrand = document.getElementById('footer-brand');
+            if(fBrand) fBrand.innerText = settings.brandName;
+            const waBtn = document.getElementById('floating-whatsapp');
+            if(waBtn) waBtn.href = 'https://wa.me/' + settings.whatsapp;
+            renderFooterSocials();
+        }
+
+        function renderFooterSocials() {
+            const container = document.getElementById('footer-social-icons');
+            if(!container) return;
+            let html = '';
+            if(settings.socialFb) html += '<a href="' + settings.socialFb + '" target="_blank" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition"><i class="fa-brands fa-facebook-f"></i></a>';
+            if(settings.socialIg) html += '<a href="' + settings.socialIg + '" target="_blank" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition"><i class="fa-brands fa-instagram"></i></a>';
+            if(settings.socialTk) html += '<a href="' + settings.socialTk + '" target="_blank" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition"><i class="fa-brands fa-tiktok"></i></a>';
+            html += '<a href="https://wa.me/' + settings.whatsapp + '" target="_blank" class="w-10 h-10 rounded-full bg-emerald-600 hover:bg-emerald-700 flex items-center justify-center text-white transition"><i class="fa-brands fa-whatsapp"></i></a>';
+            container.innerHTML = html;
+        }
+
+        function switchView(viewName) {
+            const vStore = document.getElementById('view-store');
+            const vAdmin = document.getElementById('view-admin');
+            if(viewName === 'store') {
+                if(vStore) vStore.classList.remove('hidden');
+                if(vAdmin) vAdmin.classList.add('hidden');
+                window.scrollTo({top: 0, behavior: 'smooth'});
+                renderProductsGrid();
+            } else if(viewName === 'admin') {
+                if(vStore) vStore.classList.add('hidden');
+                if(vAdmin) vAdmin.classList.remove('hidden');
+                window.scrollTo({top: 0, behavior: 'smooth'});
+                renderAdminProducts();
+                renderAdminCategories();
+                renderAdminBanners();
+                renderAdminSizeChartBuilder();
+                loadSettingsForm();
+            }
+        }
+
+        function switchAdminTab(tabName) {
+            document.querySelectorAll('.admin-tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+                btn.classList.remove('bg-navy', 'text-white');
+                btn.classList.add('bg-gray-100', 'text-gray-600');
+            });
+            const targetTab = document.getElementById('admin-tab-' + tabName);
+            if(targetTab) targetTab.classList.remove('hidden');
+            const activeBtn = document.getElementById('tab-btn-' + tabName);
+            if(activeBtn) {
+                activeBtn.classList.add('bg-navy', 'text-white');
+                activeBtn.classList.remove('bg-gray-100', 'text-gray-600');
+            }
+        }
+
+        function renderHeroSlider() {
+            const slider = document.getElementById('hero-slider');
+            const dots = document.getElementById('slider-dots');
+            if(!slider || !banners.length) return;
+
+            slider.innerHTML = banners.map(b => 
+                '<div class="min-w-full h-full relative flex items-center justify-center">' +
+                '<img src="' + b.image + '" class="absolute inset-0 w-full h-full object-cover opacity-60">' +
+                '<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>' +
+                '<div class="relative z-10 text-center px-4 max-w-2xl space-y-3">' +
+                '<h2 class="text-3xl sm:text-5xl font-serif font-bold text-white tracking-wide">' + (b.title || '') + '</h2>' +
+                '<p class="text-sm sm:text-lg text-gray-200">' + (b.subtitle || '') + '</p>' +
+                '</div></div>'
+            ).join('');
+
+            if(dots) {
+                dots.innerHTML = banners.map((_, idx) => 
+                    '<button onclick="currentSlide = ' + idx + '; updateSlider();" class="w-3 h-3 rounded-full transition ' + (idx === currentSlide ? 'bg-white scale-110' : 'bg-white/50') + '"></button>'
+                ).join('');
+            }
+            updateSlider();
+        }
+
+        function updateSlider() {
+            const slider = document.getElementById('hero-slider');
+            if(slider) slider.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+            renderHeroSliderDots();
+        }
+
+        function renderHeroSliderDots() {
+            const dots = document.getElementById('slider-dots');
+            if(!dots || !dots.children.length) return;
+            Array.from(dots.children).forEach((btn, idx) => {
+                btn.className = 'w-3 h-3 rounded-full transition ' + (idx === currentSlide ? 'bg-white scale-110' : 'bg-white/50');
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % banners.length;
+            updateSlider();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + banners.length) % banners.length;
+            updateSlider();
+        }
+
+        function startSliderTimer() {
+            if(slideInterval) clearInterval(slideInterval);
+            slideInterval = setInterval(() => {
+                if(banners.length > 1) nextSlide();
+            }, 5000);
+        }
+
+        function renderCategoryTabs() {
+            const container = document.getElementById('category-tabs');
+            if(!container) return;
+            let html = '<button onclick="filterCategory(\'All\')" class="px-5 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition ' + (currentCategoryFilter === 'All' ? 'bg-navy text-white shadow-md' : 'bg-white text-gray-700 hover:bg-gray-100 border') + '">All Collections</button>';
+            
+            categories.append = categories.forEach(cat => {
+                html += '<button onclick="filterCategory(\'' + cat.name + '\')" class="px-5 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition ' + (currentCategoryFilter === cat.name ? 'bg-navy text-white shadow-md' : 'bg-white text-gray-700 hover:bg-gray-100 border') + '">' + cat.name + '</button>';
+            });
+            // Re-doing cleanly:
+            html = '<button onclick="filterCategory(\'All\')" class="px-5 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition ' + (currentCategoryFilter === 'All' ? 'bg-navy text-white shadow-md' : 'bg-white text-gray-700 hover:bg-gray-100 border') + '">All Collections</button>';
+            categories.forEach(cat => {
+                html += '<button onclick="filterCategory(\'' + cat.name + '\')" class="px-5 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition ' + (currentCategoryFilter === cat.name ? 'bg-navy text-white shadow-md' : 'bg-white text-gray-700 hover:bg-gray-100 border') + '">' + cat.name + '</button>';
+            });
+            container.innerHTML = html;
+            renderSubCategoryPills();
+        }
+
+        function renderSubCategoryPills() {
+            const container = document.getElementById('subcategory-pills');
+            if(!container) return;
+            let subs = ["All"];
+            if(currentCategoryFilter !== "All") {
+                const found = categories.find(c => c.name === currentCategoryFilter);
+                if(found && found.subs) {
+                    subs = ["All", ...found.subs];
+                }
+            } else {
+                categories.forEach(c => {
+                    if(c.subs) c.subs.forEach(s => { if(!subs.includes(s)) subs.push(s); });
+                });
+            }
+
+            container.innerHTML = subs.map(sub => 
+                '<button onclick="filterSubCategory(\'' + sub + '\')" class="px-3 py-1 rounded-full border transition ' + (currentSubCategoryFilter === sub ? 'bg-primary text-white border-primary' : 'bg-white text-gray-600 hover:bg-gray-50') + '">' + sub + '</button>'
+            ).join('');
+        }
+
+        function filterCategory(catName) {
+            currentCategoryFilter = catName;
+            currentSubCategoryFilter = "All";
+            renderCategoryTabs();
+            renderProductsGrid();
+        }
+
+        function filterSubCategory(subName) {
+            currentSubCategoryFilter = subName;
+            renderSubCategoryPills();
+            renderProductsGrid();
+        }
+
+        function renderProductsGrid() {
+            const grid = document.getElementById('products-grid');
+            if(!grid) return;
+            let filtered = products.filter(p => {
+                let matchCat = currentCategoryFilter === "All" || p.category === currentCategoryFilter;
+                let matchSub = currentSubCategoryFilter === "All" || p.subcategory === currentSubCategoryFilter;
+                return matchCat && matchSub;
+            });
+
+            if(!filtered.length) {
+                grid.innerHTML = '<div class="col-span-full text-center py-16 text-gray-500 font-medium">No products found in this category.</div>';
+                return;
+            }
+
+            grid.innerHTML = filtered.map(p => {
+                let discountPercent = 0;
+                if(p.saleprice && p.saleprice < p.price) {
+                    discountPercent = Math.round(((p.price - p.saleprice) / p.price) * 100);
+                }
+
+                return '<div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition group border border-gray-100 flex flex-col justify-between">' +
+                    '<div class="relative h-56 sm:h-80 overflow-hidden bg-gray-100 cursor-pointer" onclick="openProductModal(\'' + p.id + '\')">' +
+                    '<img src="' + p.image + '" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">' +
+                    (discountPercent > 0 ? '<span class="absolute top-2 left-2 sm:top-3 sm:left-3 bg-red-600 text-white text-[10px] sm:text-xs font-bold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg shadow">' + discountPercent + '% OFF</span>' : '') +
+                    (p.soldout ? '<div class="absolute inset-0 bg-black/60 flex items-center justify-center"><span class="bg-red-600 text-white font-bold px-3 py-1.5 rounded-xl text-xs sm:text-sm tracking-wider uppercase">Sold Out</span></div>' : '') +
+                    '</div>' +
+                    '<div class="p-3 sm:p-4 space-y-2 flex-grow flex flex-col justify-between">' +
+                    '<div class="cursor-pointer" onclick="openProductModal(\'' + p.id + '\')">' +
+                    '<span class="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-primary">' + p.category + (p.subcategory ? ' • ' + p.subcategory : '') + '</span>' +
+                    '<h3 class="font-serif font-bold text-navy text-sm sm:text-base group-hover:text-primary transition line-clamp-1">' + p.title + '</h3>' +
+                    '<div class="flex items-center space-x-2 mt-1">' +
+                    (p.saleprice && p.saleprice < p.price ? 
+                        '<span class="text-sm sm:text-lg font-bold text-red-600">Rs. ' + Number(p.saleprice).toLocaleString() + '</span>' +
+                        '<span class="text-xs sm:text-sm text-gray-400 line-through">Rs. ' + Number(p.price).toLocaleString() + '</span>' :
+                        '<span class="text-sm sm:text-lg font-bold text-navy">Rs. ' + Number(p.price).toLocaleString() + '</span>'
+                    ) +
+                    '</div>' +
+                    (p.bottoms && p.bottoms.length ? '<div class="flex flex-wrap gap-1 pt-1">' + p.bottoms.map(b => '<span class="bg-gray-100 text-gray-600 text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded font-medium">' + b + '</span>').join('') + '</div>' : '') +
+                    '</div>' +
+                    '<div class="border-t pt-2 flex items-center justify-between text-xs text-gray-500">' +
+                    '<span class="font-medium text-[10px] sm:text-xs">Share:</span>' +
+                    '<div class="flex space-x-2">' +
+                    '<button onclick="shareProductWhatsApp(\'' + p.id + '\')" title="Share on WhatsApp" class="text-emerald-600 hover:text-emerald-700 p-1"><i class="fa-brands fa-whatsapp text-sm"></i></button>' +
+                    '<button onclick="shareProductFacebook(\'' + p.id + '\')" title="Share on Facebook" class="text-blue-600 hover:text-blue-700 p-1"><i class="fa-brands fa-facebook text-sm"></i></button>' +
+                    '<button onclick="copyProductLink(\'' + p.id + '\')" title="Copy Link" class="text-gray-600 hover:text-gray-800 p-1"><i class="fa-solid fa-link text-sm"></i></button>' +
+                    '</div></div></div></div>';
+            }).join('');
+        }
+
+        function shareProductWhatsApp(id) {
+            const p = products.find(item => item.id === id);
+            if(!p) return;
+            let text = 'Check out this amazing dress from Zaynab Noor: *' + p.title + '* - Rs. ' + (p.saleprice || p.price) + '%0AImage: ' + p.image;
+            window.open('https://wa.me/?text=' + text, '_blank');
+        }
+
+        function shareProductFacebook(id) {
+            const p = products.find(item => item.id === id);
+            if(!p) return;
+            window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(p.image), '_blank');
+        }
+
+        function copyProductLink(id) {
+            const p = products.find(item => item.id === id);
+            if(!p) return;
+            navigator.clipboard.writeText(p.image);
+            alert("Product link copied to clipboard!");
+        }
+
+        function openProductModal(id) {
+            const p = products.find(item => item.id === id);
+            if(!p) return;
+
+            const modal = document.getElementById('product-modal');
+            const content = document.getElementById('modal-content');
+            if(!modal || !content) return;
+
+            content.innerHTML = '<div class="h-80 sm:h-full bg-gray-100 relative">' +
+                '<img src="' + p.image + '" class="w-full h-full object-cover">' +
+                '</div>' +
+                '<div class="p-6 sm:p-8 flex flex-col justify-between space-y-4">' +
+                '<div class="space-y-3">' +
+                '<span class="text-xs font-semibold uppercase tracking-wider text-primary">' + p.category + (p.subcategory ? ' • ' + p.subcategory : '') + '</span>' +
+                '<h2 class="text-2xl font-serif font-bold text-navy">' + p.title + '</h2>' +
+                '<div class="flex items-center space-x-3">' +
+                (p.saleprice && p.saleprice < p.price ? 
+                    '<span class="text-2xl font-bold text-red-600">Rs. ' + Number(p.saleprice).toLocaleString() + '</span>' +
+                    '<span class="text-base text-gray-400 line-through">Rs. ' + Number(p.price).toLocaleString() + '</span>' :
+                    '<span class="text-2xl font-bold text-navy">Rs. ' + Number(p.price).toLocaleString() + '</span>'
+                ) +
+                '</div>' +
+                '<p class="text-sm text-gray-600 leading-relaxed">' + (p.desc || 'No description provided.') + '</p>' +
+                '<div>' +
+                '<label class="block text-xs font-bold text-gray-700 uppercase mb-2">Select Size:</label>' +
+                '<div id="modal-sizes" class="flex flex-wrap gap-2">' +
+                ['Small', 'Medium', 'Large', 'XL', 'XXL', '3XL', '4XL'].map((sz, idx) => 
+                    '<button type="button" onclick="selectModalOption(\'size\', \'' + sz + '\')" class="size-btn px-3.5 py-1.5 rounded-xl border text-xs font-bold transition ' + (idx === 0 ? 'bg-navy text-white border-navy' : 'bg-white text-gray-700 hover:bg-gray-50') + '">' + sz + '</button>'
+                ).join('') +
+                '</div></div>' +
+                (p.bottoms && p.bottoms.length ? 
+                    '<div>' +
+                    '<label class="block text-xs font-bold text-gray-700 uppercase mb-2">Select Bottom Style:</label>' +
+                    '<div id="modal-bottoms" class="flex flex-wrap gap-2">' +
+                    p.bottoms.map((bt, idx) => 
+                        '<button type="button" onclick="selectModalOption(\'bottom\', \'' + bt + '\')" class="bottom-btn px-3.5 py-1.5 rounded-xl border text-xs font-bold transition ' + (idx === 0 ? 'bg-primary text-white border-primary' : 'bg-white text-gray-700 hover:bg-gray-50') + '">' + bt + '</button>'
+                    ).join('') +
+                    '</div></div>' : ''
+                ) +
+                '</div>' +
+                '<div class="space-y-3 pt-4 border-t">' +
+                (p.soldout ? 
+                    '<button disabled class="w-full bg-gray-300 text-gray-600 py-3 rounded-2xl font-bold cursor-not-allowed">Sold Out</button>' :
+                    '<div class="flex space-x-3">' +
+                    '<button onclick="addToCart(\'' + p.id + '\')" class="flex-1 bg-navy hover:bg-navy/90 text-white py-3 rounded-2xl font-bold flex items-center justify-center space-x-2 transition shadow-md"><i class="fa-solid fa-bag-shopping"></i><span>Add to Cart</span></button>' +
+                    '<button onclick="buyNowWhatsApp(\'' + p.id + '\')" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-2xl font-bold flex items-center justify-center space-x-2 transition shadow-md"><i class="fa-brands fa-whatsapp text-lg"></i><span>Buy Now</span></button>' +
+                    '</div>'
+                ) +
+                '</div></div>';
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            window.activeModalProduct = p;
+            window.selectedModalSize = 'Small';
+            window.selectedModalBottom = p.bottoms && p.bottoms.length ? p.bottoms[0] : '';
+        }
+
+        function closeProductModal() {
+            const modal = document.getElementById('product-modal');
+            if(modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        function selectModalOption(type, val) {
+            if(type === 'size') {
+                window.selectedModalSize = val;
+                document.querySelectorAll('.size-btn').forEach(btn => {
+                    if(btn.innerText === val) {
+                        btn.className = "size-btn px-3.5 py-1.5 rounded-xl border text-xs font-bold transition bg-navy text-white border-navy";
+                    } else {
+                        btn.className = "size-btn px-3.5 py-1.5 rounded-xl border text-xs font-bold transition bg-white text-gray-700 hover:bg-gray-50";
+                    }
+                });
+            } else if(type === 'bottom') {
+                window.selectedModalBottom = val;
+                document.querySelectorAll('.bottom-btn').forEach(btn => {
+                    if(btn.innerText === val) {
+                        btn.className = "bottom-btn px-3.5 py-1.5 rounded-xl border text-xs font-bold transition bg-primary text-white border-primary";
+                    } else {
+                        btn.className = "bottom-btn px-3.5 py-1.5 rounded-xl border text-xs font-bold transition bg-white text-gray-700 hover:bg-gray-50";
+                    }
+                });
+            }
+        }
+
+        function addToCart(productId) {
+            const p = products.find(item => item.id === productId);
+            if(!p) return;
+
+            const size = window.selectedModalSize || 'Small';
+            const bottom = window.selectedModalBottom || (p.bottoms ? p.bottoms[0] : 'Standard');
+            const finalPrice = (p.saleprice && p.saleprice < p.price) ? Number(p.saleprice) : Number(p.price);
+
+            cart.push({
+                cartId: Date.now() + Math.random(),
+                id: p.id,
+                title: p.title,
+                price: finalPrice,
+                image: p.image,
+                size: size,
+                bottom: bottom,
+                qty: 1
+            });
+
+            saveAllData();
+            updateCartBadge();
+            closeProductModal();
+            openCartDrawer();
+        }
+
+        function removeFromCart(cartId) {
+            cart = cart.filter(item => item.cartId !== cartId);
+            saveAllData();
+            updateCartBadge();
+            renderCartDrawer();
+        }
+
+        function updateCartBadge() {
+            const badge = document.getElementById('cart-badge');
+            if(!badge) return;
+            if(cart.length > 0) {
+                badge.innerText = cart.length;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+        }
+
+        function openCartDrawer() {
+            renderCartDrawer();
+            const drawer = document.getElementById('cart-drawer');
+            if(drawer) {
+                drawer.classList.remove('hidden');
+                drawer.classList.add('flex');
+            }
+        }
+
+        function closeCartDrawer() {
+            const drawer = document.getElementById('cart-drawer');
+            if(drawer) {
+                drawer.classList.add('hidden');
+                drawer.classList.remove('flex');
+            }
+        }
+
+        function renderCartDrawer() {
+            const list = document.getElementById('cart-items-list');
+            const totalEl = document.getElementById('cart-total-price');
+            if(!list || !totalEl) return;
+
+            if(!cart.length) {
+                list.innerHTML = '<div class="text-center py-12 text-gray-400 font-medium">Your cart is empty.</div>';
+                totalEl.innerText = "Rs. 0";
+                return;
+            }
+
+            let total = 0;
+            list.innerHTML = cart.map(item => {
+                total += item.price * item.qty;
+                return '<div class="flex items-center space-x-4 py-3">' +
+                    '<img src="' + item.image + '" class="w-16 h-16 object-cover rounded-xl border">' +
+                    '<div class="flex-1">' +
+                    '<h4 class="font-bold text-navy text-sm line-clamp-1">' + item.title + '</h4>' +
+                    '<p class="text-xs text-gray-500">Size: <span class="font-semibold text-gray-700">' + item.size + '</span> | Bottom: <span class="font-semibold text-gray-700">' + item.bottom + '</span></p>' +
+                    '<p class="text-sm font-bold text-primary mt-1">Rs. ' + Number(item.price).toLocaleString() + '</p>' +
+                    '</div>' +
+                    '<button onclick="removeFromCart(' + item.cartId + ')" class="text-red-500 hover:text-red-700 p-2"><i class="fa-solid fa-trash"></i></button>' +
+                    '</div>';
+            }).join('');
+
+            totalEl.innerText = 'Rs. ' + total.toLocaleString();
+        }
+
+        function checkoutCartWhatsApp() {
+            if(!cart.length) return;
+            let msg = '🛍️ *NEW ORDER FROM ZAYNAB NOOR*%0A%0A';
+            let total = 0;
+
+            cart.forEach((item, idx) => {
+                let itemTotal = item.price * item.qty;
+                total += itemTotal;
+                msg += '📦 *ITEM #' + (idx + 1) + '*%0A';
+                msg += '▪️ *Title:* ' + item.title + '%0A';
+                msg += '▪️ *Price:* Rs. ' + item.price.toLocaleString() + '%0A';
+                msg += '▪️ *Size:* ' + item.size + '%0A';
+                msg += '▪️ *Bottom:* ' + item.bottom + '%0A';
+                msg += '▪️ *Photo:* ' + item.image + '%0A%0A';
+            });
+
+            msg += '==============================%0A';
+            msg += '💰 *Total Amount: Rs. ' + total.toLocaleString() + '*%0A';
+            msg += '==============================%0A';
+            msg += 'Kindly confirm my order and share delivery details!';
+
+            window.open('https://wa.me/' + settings.whatsapp + '?text=' + encodeURIComponent(msg), '_blank');
+        }
+
+        function buyNowWhatsApp(productId) {
+            const p = products.find(item => item.id === productId);
+            if(!p) return;
+
+            const size = window.selectedModalSize || 'Small';
+            const bottom = window.selectedModalBottom || (p.bottoms ? p.bottoms[0] : 'Standard');
+            const price = (p.saleprice && p.saleprice < p.price) ? p.saleprice : p.price;
+
+            let msg = '🛍️ *DIRECT ORDER - ZAYNAB NOOR*%0A%0A';
+            msg += '*Product:* ' + p.title + '%0A';
+            msg += '*Price:* Rs. ' + Number(price).toLocaleString() + '%0A';
+            msg += '*Size:* ' + size + '%0A';
+            msg += '*Bottom Style:* ' + bottom + '%0A';
+            msg += '*Image:* ' + p.image + '%0A%0A';
+            msg += 'Kindly confirm this order!';
+
+            window.open('https://wa.me/' + settings.whatsapp + '?text=' + encodeURIComponent(msg), '_blank');
+        }
+
+        function openSizeChartModal() {
+            const container = document.getElementById('sizechart-container');
+            if(!container) return;
+            if(sizeChartTable && sizeChartTable.length > 0) {
+                let html = '<table class="w-full border-collapse border border-gray-200 text-xs sm:text-sm">';
+                sizeChartTable.forEach((row, rIdx) => {
+                    html += '<tr class="' + (rIdx === 0 ? 'bg-navy text-white font-bold' : 'border-b') + '">';
+                    row.forEach(cell => {
+                        html += '<td class="p-2.5 border border-gray-200">' + cell + '</td>';
+                    });
+                    html += '</tr>';
+                });
+                html += '</table>';
+                container.innerHTML = html;
+            } else {
+                container.innerHTML = '<p class="text-gray-500 py-4">No size chart available.</p>';
+            }
+            const modal = document.getElementById('sizechart-modal');
+            if(modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
+        }
+
+        function closeSizeChartModal() {
+            const modal = document.getElementById('sizechart-modal');
+            if(modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        function openAdminLogin() {
+            const modal = document.getElementById('admin-login-modal');
+            if(modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
+        }
+
+        function closeAdminLogin() {
+            const modal = document.getElementById('admin-login-modal');
+            if(modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            const pinInput = document.getElementById('admin-pin-input');
+            const pin = pinInput ? pinInput.value : '';
+            if(pin === settings.adminPin) {
+                closeAdminLogin();
+                switchView('admin');
+                if(pinInput) pinInput.value = "";
+            } else {
+                alert("Incorrect PIN code!");
+            }
+        }
+
+        function logoutAdmin() {
+            switchView('store');
+        }
+
+        function renderAdminProducts() {
+            const tbody = document.getElementById('admin-products-tbody');
+            const countBadge = document.getElementById('product-count-badge');
+            if(countBadge) countBadge.innerText = products.length + ' Items';
+            
+            const catSelect = document.getElementById('p-category');
+            if(catSelect) {
+                catSelect.innerHTML = categories.map(c => '<option value="' + c.name + '">' + c.name + '</option>').join('');
+                updateSubCategoryDropdown();
+            }
+
+            if(!tbody) return;
+            if(!products.length) {
+                tbody.innerHTML = '<tr><td colspan="6" class="p-6 text-center text-gray-400">No products added yet.</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = products.map(p => 
+                '<tr class="hover:bg-gray-50/50">' +
+                '<td class="p-4"><img src="' + p.image + '" class="w-12 h-12 object-cover rounded-xl border"></td>' +
+                '<td class="p-4"><p class="font-bold text-navy">' + p.title + '</p><p class="text-xs text-gray-500">' + p.category + (p.subcategory ? ' • ' + p.subcategory : '') + '</p></td>' +
+                '<td class="p-4">' + (p.saleprice && p.saleprice < p.price ? '<span class="font-bold text-red-600">Rs. ' + Number(p.saleprice).toLocaleString() + '</span><span class="text-xs text-gray-400 line-through">Rs. ' + Number(p.price).toLocaleString() + '</span>' : '<span class="font-bold text-navy">Rs. ' + Number(p.price).toLocaleString() + '</span>') + '</td>' +
+                '<td class="p-4"><div class="flex flex-wrap gap-1">' + (p.bottoms && p.bottoms.length ? p.bottoms.map(b => '<span class="bg-gray-100 text-gray-600 text-[10px] px-2 py-0.5 rounded">' + b + '</span>').join('') : '-') + '</div></td>' +
+                '<td class="p-4">' + (p.soldout ? '<span class="bg-red-100 text-red-600 text-xs font-bold px-2 py-1 rounded">Sold Out</span>' : '<span class="bg-emerald-100 text-emerald-600 text-xs font-bold px-2 py-1 rounded">Active</span>') + '</td>' +
+                '<td class="p-4 text-right space-x-1 sm:space-x-2">' +
+                '<button onclick="duplicateProduct(\'' + p.id + '\')" title="Duplicate Product" class="text-emerald-600 hover:text-emerald-800 p-1.5"><i class="fa-solid fa-copy"></i></button>' +
+                '<button onclick="editProduct(\'' + p.id + '\')" title="Edit Product" class="text-blue-600 hover:text-blue-800 p-1.5"><i class="fa-solid fa-pen-to-square"></i></button>' +
+                '<button onclick="deleteProduct(\'' + p.id + '\')" title="Delete Product" class="text-red-600 hover:text-red-800 p-1.5"><i class="fa-solid fa-trash"></i></button>' +
+                '</td></tr>'
+            ).join('');
+        }
+
+        function duplicateProduct(id) {
+            const p = products.find(item => item.id === id);
+            if(!p) return;
+            const duplicated = Object.assign({}, p, {
+                id: 'p_' + Date.now(),
+                title: p.title + ' (Copy)'
+            });
+            products.unshift(duplicated);
+            saveAllData();
+            renderAdminProducts();
+            alert("Product duplicated successfully!");
+        }
+
+        function updateSubCategoryDropdown() {
+            const catSelect = document.getElementById('p-category');
+            const subSelect = document.getElementById('p-subcategory');
+            if(!catSelect || !subSelect) return;
+            const catName = catSelect.value;
+            const found = categories.find(c => c.name === catName);
+            if(found && found.subs) {
+                subSelect.innerHTML = '<option value="">None / All</option>' + found.subs.map(s => '<option value="' + s + '">' + s + '</option>').join('');
+            } else {
+                subSelect.innerHTML = '<option value="">None / All</option>';
+            }
+        }
+
+        function handleProductSubmit(e) {
+            e.preventDefault();
+            const editId = document.getElementById('edit-product-id').value;
+            const title = document.getElementById('p-title').value;
+            const category = document.getElementById('p-category').value;
+            const subcategory = document.getElementById('p-subcategory').value;
+            const price = Number(document.getElementById('p-price').value);
+            const saleprice = document.getElementById('p-saleprice').value ? Number(document.getElementById('p-saleprice').value) : null;
+            const image = document.getElementById('p-image').value;
+            const desc = document.getElementById('p-desc').value;
+            const soldout = document.getElementById('p-soldout').checked;
+            const bottoms = Array.from(document.querySelectorAll('input[name="p-bottoms"]:checked')).map(cb => cb.value);
+
+            if(editId) {
+                const idx = products.findIndex(p => p.id === editId);
+                if(idx !== -1) {
+                    products[idx] = Object.assign({}, products[idx], { title, category, subcategory, price, saleprice, image, desc, bottoms, soldout });
+                }
+            } else {
+                const newProduct = {
+                    id: 'p_' + Date.now(),
+                    title, category, subcategory, price, saleprice, image, desc, bottoms, soldout
+                };
+                products.unshift(newProduct);
+            }
+
+            saveAllData();
+            resetProductForm();
+            renderAdminProducts();
+        }
+
+        function editProduct(id) {
+            const p = products.find(item => item.id === id);
+            if(!p) return;
+
+            document.getElementById('edit-product-id').value = p.id;
+            document.getElementById('p-title').value = p.title;
+            document.getElementById('p-category').value = p.category;
+            updateSubCategoryDropdown();
+            document.getElementById('p-subcategory').value = p.subcategory || '';
+            document.getElementById('p-price').value = p.price;
+            document.getElementById('p-saleprice').value = p.saleprice || '';
+            document.getElementById('p-image').value = p.image;
+            document.getElementById('p-desc').value = p.desc || '';
+            document.getElementById('p-soldout').checked = p.soldout;
+
+            document.querySelectorAll('input[name="p-bottoms"]').forEach(cb => {
+                cb.checked = p.bottoms && p.bottoms.includes(cb.value);
+            });
+
+            const formTitle = document.getElementById('product-form-title');
+            if(formTitle) formTitle.innerText = "Edit Product";
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function resetProductForm() {
+            const form = document.getElementById('product-form');
+            if(form) form.reset();
+            document.getElementById('edit-product-id').value = "";
+            const formTitle = document.getElementById('product-form-title');
+            if(formTitle) formTitle.innerText = "Add New Product";
+            updateSubCategoryDropdown();
+        }
+
+        function deleteProduct(id) {
+            if(confirm("Are you sure you want to delete this product?")) {
+                products = products.filter(p => p.id !== id);
+                saveAllData();
+                renderAdminProducts();
+            }
+        }
+
+        function renderAdminCategories() {
+            const container = document.getElementById('admin-categories-list');
+            if(!container) return;
+            container.innerHTML = categories.map((cat, idx) => 
+                '<div class="p-4 border rounded-2xl bg-gray-50/50 space-y-3">' +
+                '<div class="flex justify-between items-center"><h4 class="font-bold text-navy text-base">' + cat.name + '</h4>' +
+                '<button onclick="deleteCategory(' + idx + ')" class="text-red-600 hover:text-red-800 text-xs font-semibold"><i class="fa-solid fa-trash mr-1"></i>Delete Category</button></div>' +
+                '<div class="flex flex-wrap gap-2 items-center"><span class="text-xs text-gray-500 font-medium">Sub-Categories:</span>' +
+                (cat.subs && cat.subs.length ? cat.subs.map((sub, sIdx) => 
+                    '<span class="bg-white border text-xs px-3 py-1 rounded-xl flex items-center space-x-1 shadow-xs"><span>' + sub + '</span>' +
+                    '<button onclick="deleteSubCategory(' + idx + ', ' + sIdx + ')" class="text-red-500 hover:text-red-700 ml-1"><i class="fa-solid fa-xmark"></i></button></span>'
+                ).join('') : '<span class="text-xs text-gray-400 italic">No sub-categories</span>') +
+                '</div>' +
+                '<form onsubmit="handleAddSubCategory(event, ' + idx + ')" class="flex gap-2 pt-2">' +
+                '<input type="text" id="new-sub-' + idx + '" required placeholder="Add sub-category (e.g. 3PC, Frock)" class="px-3 py-1.5 border rounded-xl text-xs focus:ring-2 focus:ring-navy focus:outline-none flex-1 max-w-xs">' +
+                '<button type="submit" class="bg-navy text-white px-4 py-1.5 rounded-xl text-xs font-medium hover:bg-navy/90">Add Sub</button>' +
+                '</form></div>'
+            ).join('');
+        }
+
+        function handleCategoryAdd(e) {
+            e.preventDefault();
+            const input = document.getElementById('new-cat-name');
+            const name = input ? input.value.trim() : '';
+            if(name && !categories.some(c => c.name.toLowerCase() === name.toLowerCase())) {
+                categories.push({ name: name, subs: ["2PC", "3PC"] });
+                saveAllData();
+                if(input) input.value = "";
+                renderAdminCategories();
+            }
+        }
+
+        function deleteCategory(idx) {
+            if(confirm("Delete this category?")) {
+                categories.splice(idx, 1);
+                saveAllData();
+                renderAdminCategories();
+            }
+        }
+
+        function handleAddSubCategory(e, catIdx) {
+            e.preventDefault();
+            const input = document.getElementById('new-sub-' + catIdx);
+            const val = input ? input.value.trim() : '';
+            if(val) {
+                if(!categories[catIdx].subs) categories[catIdx].subs = [];
+                if(!categories[catIdx].subs.includes(val)) {
+                    categories[catIdx].subs.push(val);
+                    saveAllData();
+                    renderAdminCategories();
+                }
+            }
+        }
+
+        function deleteSubCategory(catIdx, subIdx) {
+            categories[catIdx].subs.splice(subIdx, 1);
+            saveAllData();
+            renderAdminCategories();
+        }
+
+        function renderAdminBanners() {
+            const container = document.getElementById('admin-banners-list');
+            if(!container) return;
+            container.innerHTML = banners.map((b, idx) => 
+                '<div class="p-4 border rounded-2xl bg-gray-50/50 flex space-x-4 items-center">' +
+                '<img src="' + b.image + '" class="w-24 h-16 object-cover rounded-xl border">' +
+                '<div class="flex-1"><h4 class="font-bold text-navy text-sm">' + (b.title || 'Untitled') + '</h4><p class="text-xs text-gray-500">' + (b.subtitle || '') + '</p></div>' +
+                '<button onclick="deleteBanner(' + idx + ')" class="text-red-600 hover:text-red-800 p-2"><i class="fa-solid fa-trash"></i></button>' +
+                '</div>'
+            ).join('');
+        }
+
+        function handleBannerAdd(e) {
+            e.preventDefault();
+            const image = document.getElementById('b-image').value;
+            const title = document.getElementById('b-title').value;
+            const subtitle = document.getElementById('b-subtitle').value;
+
+            banners.push({ image, title, subtitle });
+            saveAllData();
+            document.getElementById('b-image').value = "";
+            document.getElementById('b-title').value = "";
+            document.getElementById('b-subtitle').value = "";
+            renderAdminBanners();
+            renderHeroSlider();
+        }
+
+        function deleteBanner(idx) {
+            if(confirm("Delete this banner?")) {
+                banners.splice(idx, 1);
+                saveAllData();
+                renderAdminBanners();
+                renderHeroSlider();
+            }
+        }
+
+        function renderAdminSizeChartBuilder() {
+            const table = document.getElementById('admin-sizechart-table');
+            if(!table || !sizeChartTable || !sizeChartTable.length) return;
+
+            let html = '';
+            sizeChartTable.forEach((row, rIdx) => {
+                html += '<tr class="' + (rIdx === 0 ? 'bg-gray-100 font-bold' : '') + '">';
+                row.forEach((cell, cIdx) => {
+                    html += '<td class="p-2 border border-gray-200">' +
+                        '<div class="flex items-center space-x-1">' +
+                        '<input type="text" value="' + cell + '" onchange="updateSizeChartCell(' + rIdx + ', ' + cIdx + ', this.value)" class="w-full px-2 py-1 border rounded text-xs focus:ring-1 focus:ring-navy focus:outline-none ' + (rIdx === 0 ? 'font-bold text-navy' : '') + '">' +
+                        (rIdx === 0 && row.length > 1 ? '<button onclick="deleteSizeChartCol(' + cIdx + ')" title="Delete Col" class="text-red-500 hover:text-red-700 text-xs px-1"><i class="fa-solid fa-xmark"></i></button>' : '') +
+                        '</div></td>';
+                });
+                html += '<td class="p-2 border border-gray-200 text-center w-16">' +
+                    (rIdx > 0 ? '<button onclick="deleteSizeChartRow(' + rIdx + ')" class="text-red-600 hover:text-red-800 text-xs p-1"><i class="fa-solid fa-trash"></i></button>' : '<span class="text-[10px] text-gray-400 font-bold uppercase">Header</span>') +
+                    '</td></tr>';
+            });
+            table.innerHTML = html;
+        }
+
+        function updateSizeChartCell(r, c, val) {
+            sizeChartTable[r][c] = val;
+        }
+
+        function addSizeChartRow() {
+            const cols = sizeChartTable[0] ? sizeChartTable[0].length : 4;
+            const newRow = new Array(cols).fill("New Data");
+            sizeChartTable.push(newRow);
+            renderAdminSizeChartBuilder();
+        }
+
+        function addSizeChartCol() {
+            sizeChartTable.forEach((row, idx) => {
+                row.push(idx === 0 ? "New Col" : '0"');
+            });
+            renderAdminSizeChartBuilder();
+        }
+
+        function deleteSizeChartRow(rIdx) {
+            sizeChartTable.splice(rIdx, 1);
+            renderAdminSizeChartBuilder();
+        }
+
+        function deleteSizeChartCol(cIdx) {
+            sizeChartTable.forEach(row => {
+                row.splice(cIdx, 1);
+            });
+            renderAdminSizeChartBuilder();
+        }
+
+        function saveSizeChartTable() {
+            saveAllData();
+            alert("Size chart saved successfully!");
+        }
+
+        function loadSettingsForm() {
+            document.getElementById('set-brand-name').value = settings.brandName;
+            document.getElementById('set-logo-url').value = settings.logoUrl || '';
+            document.getElementById('set-announcement').value = settings.announcement;
+            document.getElementById('set-whatsapp').value = settings.whatsapp;
+            document.getElementById('set-new-pin').value = "";
+            document.getElementById('set-social-fb').value = settings.socialFb || '';
+            document.getElementById('set-social-ig').value = settings.socialIg || '';
+            document.getElementById('set-social-tk').value = settings.socialTk || '';
+        }
+
+        function handleSettingsSave(e) {
+            e.preventDefault();
+            settings.brandName = document.getElementById('set-brand-name').value;
+            settings.logoUrl = document.getElementById('set-logo-url').value;
+            settings.announcement = document.getElementById('set-announcement').value;
+            settings.whatsapp = document.getElementById('set-whatsapp').value;
+            settings.socialFb = document.getElementById('set-social-fb').value;
+            settings.socialIg = document.getElementById('set-social-ig').value;
+            settings.socialTk = document.getElementById('set-social-tk').value;
+
+            const newPin = document.getElementById('set-new-pin').value;
+            if(newPin) {
+                settings.adminPin = newPin;
+            }
+
+            saveAllData();
+            applySettings();
+            alert("Store settings saved successfully!");
+        }
+
+        function handleImageUpload(event, targetInputId) {
+            const file = event.target.files[0];
+            if(!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById(targetInputId).value = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    </script>
+</body>
+</html>
